@@ -37,13 +37,13 @@ const RegistrationScreen = (props) => {
     setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
     Keyboard.dismiss();
   }, [setShow]);
-  const keyboardBlurHiden = useCallback(() => {
+  const keyboardBlurHiden = () => {
     setInputNameInFocus("");
     if (!isShowKeyb) {
       return;
     }
     setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
-  }, [setShow]);
+  };
 
   const onFocusInput = useCallback(
     (inputName) => {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   toggleInput: { width: "100%" },
   toggleBtn: {
-    bottom: 40,
+    bottom: 38,
     alignSelf: "flex-end",
     // left: 270,
   },

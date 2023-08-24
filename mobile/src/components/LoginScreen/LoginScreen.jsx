@@ -37,13 +37,13 @@ const LoginScreen = (props) => {
     setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
     Keyboard.dismiss();
   }, [setShow]);
-  const keyboardBlurHiden = useCallback(() => {
+  const keyboardBlurHiden = () => {
     setInputNameInFocus("");
     if (!isShowKeyb) {
       return;
     }
     setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
-  }, [setShow]);
+  };
   const onFocusInput = useCallback(
     (inputName) => {
       setShow((prevShow) => ({ ...prevShow, isShowKeyb: true }));
@@ -59,7 +59,7 @@ const LoginScreen = (props) => {
     setState(initialState);
   };
   const { showPass, isShowKeyb } = show;
-
+  console.log("keybord", isShowKeyb);
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -85,7 +85,7 @@ const LoginScreen = (props) => {
                   placeholder="Адреса електронної пошти"
                   keyboardType="email-address"
                   onFocus={() => onFocusInput(`email`)}
-                  onBlur={keyboardBlurHiden}
+                  onBlur={() => keyboardBlurHiden()}
                   value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
@@ -108,7 +108,7 @@ const LoginScreen = (props) => {
                       }))
                     }
                     onFocus={() => onFocusInput(`password`)}
-                    onBlur={keyboardBlurHiden}
+                    onBlur={() => keyboardBlurHiden()}
                   />
                   <TouchableOpacity
                     onPress={showPassword}
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   toggleInput: { width: "100%" },
   toggleBtn: {
-    bottom: 40,
+    bottom: 38,
     alignSelf: "flex-end",
   },
   visible: {

@@ -6,7 +6,7 @@ import React from "react";
 import { useFonts } from "expo-font";
 
 const App = () => {
-  const isLogin = false; //true or false
+  const isLogin = true; //true or false
   const [fontsLoaded, fontError] = useFonts({
     mainRegular: require("./assets/fonts/Roboto-Regular.ttf"),
     mainBold: require("./assets/fonts/Roboto-Bold.ttf"),
