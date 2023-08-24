@@ -22,7 +22,7 @@ const PrivateRoutes = () => {
           headerRight: () => (
             <TouchableOpacity
               style={{ marginRight: 10 }}
-              onPress={() => console.log("Hey im centered")}
+              onPress={() => console.log("Hey im exit")}
             >
               <Feather name="log-out" size={24} color="#21212180" />
             </TouchableOpacity>

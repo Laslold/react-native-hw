@@ -51,13 +51,13 @@ const LoginScreen = (props) => {
     },
     [setShow]
   );
-  const onSubmit = useCallback(() => {
+  const onSubmit = () => {
     setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
 
     Keyboard.dismiss();
     console.log("stateLogin", state);
     setState(initialState);
-  }, [setShow]);
+  };
   const { showPass, isShowKeyb } = show;
 
   return (
