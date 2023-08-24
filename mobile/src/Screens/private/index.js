@@ -5,6 +5,7 @@ import { PostsScreen } from "../../components";
 import { CreatePostsScreen } from "../../components";
 import { ProfileScreen } from "../../components";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 const MainTab = createBottomTabNavigator();
 // const options = { headerShown: true };
@@ -18,6 +19,14 @@ const PrivateRoutes = () => {
             <AntDesign name="appstore-o" size={24} color="#21212180" />
           ),
           tabBarShowLabel: false,
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ marginRight: 10 }}
+              onPress={() => console.log("Hey im centered")}
+            >
+              <Feather name="log-out" size={24} color="#21212180" />
+            </TouchableOpacity>
+          ),
         }}
         name="Публікації"
         component={PostsScreen}
@@ -34,6 +43,14 @@ const PrivateRoutes = () => {
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="add" size={24} color="#ffffff" />
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginLeft: 10 }}
+              onPress={() => console.log("Hey im left")}
+            >
+              <Feather name="arrow-left" size={24} color="#21212180" />
+            </TouchableOpacity>
           ),
         }}
         name="Створити публікацію"

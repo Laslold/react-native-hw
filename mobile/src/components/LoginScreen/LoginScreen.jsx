@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -19,29 +19,47 @@ const initialState = {
 const LoginScreen = (props) => {
   const { navigation } = props;
   const [state, setState] = useState(initialState);
-  // const [pass, setPass] = useState("");
-  const [showPass, setShowPass] = useState(false);
-  const [isShowKeyb, setIsShowKeyb] = useState(false);
+
+  const [show, setShow] = useState({
+    showPass: false,
+    isShowKeyb: false,
+  });
+  const [inputNameInFocus, setInputNameInFocus] = useState("");
 
   const handlePress = () => {
     navigation.navigate("Registration");
   };
-  const showPassword = () => {
-    setShowPass(!showPass);
-  };
-  const keyboardHide = () => {
-    setIsShowKeyb(false);
+  const showPassword = useCallback(() => {
+    setShow((prevShow) => ({ ...prevShow, showPass: !showPass }));
+  }, [setShow]);
+  const keyboardHide = useCallback(() => {
+    setInputNameInFocus("");
+    setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
     Keyboard.dismiss();
-    console.log("state", state);
-    setState(initialState);
-  };
-  const keyboardBlurHiden = () => {
-    if (setIsShowKeyb(false)) {
+  }, [setShow]);
+  const keyboardBlurHiden = useCallback(() => {
+    setInputNameInFocus("");
+    if (!isShowKeyb) {
       return;
     }
-    setIsShowKeyb(false);
-  };
-  // console.log(`keyboadState`);
+    setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
+  }, [setShow]);
+  const onFocusInput = useCallback(
+    (inputName) => {
+      setShow((prevShow) => ({ ...prevShow, isShowKeyb: true }));
+      setInputNameInFocus(inputName);
+    },
+    [setShow]
+  );
+  const onSubmit = useCallback(() => {
+    setShow((prevShow) => ({ ...prevShow, isShowKeyb: false }));
+
+    Keyboard.dismiss();
+    console.log("stateLogin", state);
+    setState(initialState);
+  }, [setShow]);
+  const { showPass, isShowKeyb } = show;
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -59,11 +77,15 @@ const LoginScreen = (props) => {
                 style={{ ...styles.form, marginBottom: isShowKeyb ? 10 : 80 }}
               >
                 <TextInput
-                  style={styles.input}
+                  style={
+                    inputNameInFocus === "email"
+                      ? { ...styles.input, ...styles.active }
+                      : { ...styles.input, ...styles.default }
+                  }
                   placeholder="Адреса електронної пошти"
                   keyboardType="email-address"
-                  onFocus={() => setIsShowKeyb(true)}
-                  onBlur={() => keyboardBlurHiden()}
+                  onFocus={() => onFocusInput(`email`)}
+                  onBlur={keyboardBlurHiden}
                   value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
@@ -71,7 +93,11 @@ const LoginScreen = (props) => {
                 />
                 <View style={styles.toggleInput}>
                   <TextInput
-                    style={styles.input}
+                    style={
+                      inputNameInFocus === "password"
+                        ? { ...styles.input, ...styles.active }
+                        : { ...styles.input, ...styles.default }
+                    }
                     placeholder="Пароль"
                     secureTextEntry={!showPass}
                     value={state.password}
@@ -81,10 +107,8 @@ const LoginScreen = (props) => {
                         password: value,
                       }))
                     }
-                    // value={pass}
-                    // onChangeText={(text) => setPass(text)}
-                    onFocus={() => setIsShowKeyb(true)}
-                    onBlur={() => keyboardBlurHiden()}
+                    onFocus={() => onFocusInput(`password`)}
+                    onBlur={keyboardBlurHiden}
                   />
                   <TouchableOpacity
                     onPress={showPassword}
@@ -97,7 +121,7 @@ const LoginScreen = (props) => {
                     )}
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={keyboardHide} style={styles.btn}>
+                <TouchableOpacity onPress={onSubmit} style={styles.btn}>
                   <Text style={styles.btnText}> Увійти</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handlePress} style={styles.link}>
@@ -149,9 +173,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#e8e8e8",
-    backgroundColor: "#e8e8e8",
-    // marginHorizontal: 16,
     marginTop: 16,
     height: 50,
     borderRadius: 10,
@@ -160,11 +181,18 @@ const styles = StyleSheet.create({
     fontFamily: "mainRegular",
     fontSize: 16,
   },
+  default: {
+    borderColor: "#e8e8e8",
+    backgroundColor: "#e8e8e8",
+  },
+  active: {
+    borderColor: "#ff6c00",
+    backgroundColor: "#ffffff",
+  },
   toggleInput: { width: "100%" },
   toggleBtn: {
     bottom: 40,
     alignSelf: "flex-end",
-    // left: 270,
   },
   visible: {
     color: "#1b4371",
