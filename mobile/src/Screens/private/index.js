@@ -1,9 +1,9 @@
 import "react-native-gesture-handler";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { PostsScreen } from "../../components";
-import { CreatePostsScreen } from "../../components";
-import { ProfileScreen } from "../../components";
+import PostsScreen from "./PostsScreen/PostsScreen";
+import CreatePostsScreen from "./CreatePostsScreen/CreatePostsScreen";
+import ProfileScreen from "./ProfileScreen/ProfileScreen";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
