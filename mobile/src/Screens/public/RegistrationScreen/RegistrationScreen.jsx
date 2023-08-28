@@ -149,7 +149,7 @@ const RegistrationScreen = (props) => {
                   <View>
                     <Button
                       onPress={() => onSubmit(isDisable)}
-                      disabled={isDisable}
+                      disabled={!isDisable}
                       text="Зареєстуватися"
                     />
 

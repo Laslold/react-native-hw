@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 
 const Button = (props) => {
-  const { onPress, text, disabled, ...inputProps } = props;
+  const { onPress, text, disabled=false, ...inputProps } = props;
   return (
     <TouchableOpacity
       onPress={onPress}
       style={
-        disabled ? styles.btn : { ...styles.btn, backgroundColor: "#e8e8e8" }
+        !disabled ? styles.btn : { ...styles.btn, backgroundColor: "#e8e8e8" }
       }
       {...inputProps}
     >
@@ -15,6 +15,7 @@ const Button = (props) => {
     </TouchableOpacity>
   );
 };
+
 
 export default Button;
 

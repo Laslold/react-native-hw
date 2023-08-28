@@ -129,7 +129,7 @@ const LoginScreen = (props) => {
                   <View>
                     <Button
                       onPress={() => onSubmit(isDisable)}
-                      disabled={isDisable}
+                      disabled={!isDisable}
                       text="Увійти"
                     />
 
