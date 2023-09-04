@@ -4,9 +4,14 @@ import { StyleSheet } from "react-native";
 import Router from "./src/router";
 import React from "react";
 import { useFonts } from "expo-font";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 const App = () => {
-  const isLogin = true; //true or false
+  // const isLogin = useSelector(isLogine); //true or false
+
+  // const value = useSelector((state) => console.log(state));
+
   const [fontsLoaded, fontError] = useFonts({
     mainRegular: require("./assets/fonts/Roboto-Regular.ttf"),
     mainBold: require("./assets/fonts/Roboto-Bold.ttf"),
@@ -16,9 +21,11 @@ const App = () => {
     return null;
   }
   return (
-    <NavigationContainer>
-      <Router isLogin={isLogin} />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

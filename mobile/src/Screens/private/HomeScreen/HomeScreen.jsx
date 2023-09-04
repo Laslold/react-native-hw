@@ -6,10 +6,16 @@ import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, View, Text } from "react-native";
 import { PostScreen } from "../nestedScreen";
 import CreatePostsScreen from "../CreatePostsScreen";
+import { useDispatch } from "react-redux";
+import { logoutAuthThunk } from "../../../redux/auth/auth-operation";
 
 const HomeTab = createBottomTabNavigator();
 
 const HomeScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logoutAuthThunk());
+  };
   return (
     <HomeTab.Navigator>
       <HomeTab.Screen
@@ -19,16 +25,14 @@ const HomeScreen = ({ navigation }) => {
           ),
           tabBarShowLabel: false,
           headerRight: () => (
-            <TouchableOpacity
-              style={{ marginRight: 10 }}
-              onPress={() => console.log("Hey im exit")}
-            >
+            <TouchableOpacity style={{ marginRight: 10 }} onPress={logOut}>
               <Feather name="log-out" size={24} color="#21212180" />
             </TouchableOpacity>
           ),
         }}
         name="Публікації"
         component={PostScreen}
+        style={{ backgroundColor: "#fff" }}
       />
       <HomeTab.Screen
         options={{

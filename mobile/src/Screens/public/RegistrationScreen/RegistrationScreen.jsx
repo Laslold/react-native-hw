@@ -15,6 +15,8 @@ import { TouchableWithoutFeedback } from "react-native";
 import { TextField } from "../../../components";
 import styles from "./registrScreenStyles";
 import { Button } from "../../../components";
+import { signupAuthThunk } from "../../../redux/auth/auth-operation";
+import { useDispatch } from "react-redux";
 
 const RegistrationScreen = (props) => {
   const { navigation } = props;
@@ -27,6 +29,9 @@ const RegistrationScreen = (props) => {
     isShowKeyb: false,
     inputNameInFocus: "",
   });
+
+  const dispatch = useDispatch();
+
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -58,7 +63,8 @@ const RegistrationScreen = (props) => {
     if (!isDisable) return;
     setState((prevState) => ({ ...prevState, isShowKeyb: false }));
     Keyboard.dismiss();
-    console.log("stateRegister", { email, password, nickname });
+    dispatch(signupAuthThunk(state));
+    // console.log("stateRegister", { email, password, nickname });
     setState((prevState) => ({
       ...prevState,
       email: "",

@@ -15,6 +15,8 @@ import { TouchableWithoutFeedback } from "react-native";
 import { TextField } from "../../../components";
 import styles from "./loginScreenStyles";
 import { Button } from "../../../components";
+import { loginAuthThunk } from "../../../redux/auth/auth-operation";
+import { useDispatch } from "react-redux";
 const LoginScreen = (props) => {
   const { navigation } = props;
 
@@ -27,7 +29,7 @@ const LoginScreen = (props) => {
   });
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
@@ -59,7 +61,8 @@ const LoginScreen = (props) => {
     if (!isDisable) return;
     setState((prevState) => ({ ...prevState, isShowKeyb: false }));
     Keyboard.dismiss();
-    console.log("stateLogin", { email, password });
+    dispatch(loginAuthThunk(state));
+    // console.log("stateLogin", { email, password });
     setState((prevState) => ({
       ...prevState,
       email: "",
