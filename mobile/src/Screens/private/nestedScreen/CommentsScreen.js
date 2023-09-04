@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  paddingHorizontal: 16,
+    paddingHorizontal: 16,
     justifyContent: "flex-end",
   },
   image: {
@@ -209,17 +209,5 @@ const styles = StyleSheet.create({
   inputWrapper: {
     position: "relative",
     marginHorizontal: 16,
-  },
-  input: {
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    backgroundColor: "#F6F6F6",
-    fontFamily: "mainRegular",
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#BDBDBD",
-    marginBottom: 16,
-    borderRadius: 8,
   },
 });
