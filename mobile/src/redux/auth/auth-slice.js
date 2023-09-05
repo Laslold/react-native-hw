@@ -65,5 +65,15 @@ const authSlice = createSlice({
         state.error = action.error;
       });
   },
+  reducers: {
+    userCurrent: (store, { payload }) => {
+      const { displayName, email, uid } = payload;
+      const user = { email, uid, nickname: displayName };
+      return { ...store, isLogin: true, user };
+    },
+  },
 });
+
+export const { userCurrent } = authSlice.actions;
+
 export default authSlice.reducer;
