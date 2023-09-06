@@ -22,30 +22,10 @@ const PostScreen = ({ route, navigation }) => {
       const data = snapshot.val();
       setPost(Object.values(data));
     });
-    // const dbRef = ref(getDatabase());
-    // get(child(dbRef, `posts/`))
-    //   .then((snapshot) => {
-    //     if (snapshot.exists()) {
-    //       const data = snapshot.val();
-    //       setPost(Object.values(data));
-    //     } else {
-    //       console.log("No data available");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
   useEffect(() => {
     getAllPosts();
   }, []);
-
-  // useEffect(() => {
-  //   if (route.params) {
-  //     setPost((prevState) => [...prevState, route.params]);
-  //   }
-  // }, [route.params]);
-  // console.log(userInfo);
 
   const onPressComents = (postId) => {
     navigation.navigate("CommentsScreen", {
