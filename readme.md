@@ -4,4 +4,4 @@
 2. start the project => **_npm start_**
 
 Now only for Android
-![alt text](https://qr.expo.dev/eas-update?updateId=cb198f1e-b1eb-4fca-b3b1-3dfae8967ea2&appScheme=exp&host=u.expo.dev)
+![alt text](https://qr.expo.dev/eas-update?updateId=da3a11d9-2233-4eb3-85d5-0fc921104385&appScheme=exp&host=u.expo.dev)
