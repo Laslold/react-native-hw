@@ -62,11 +62,12 @@ const HomeScreen = ({ navigation }) => {
       <HomeTab.Screen
         options={{
           tabBarShowLabel: false,
+
           tabBarIcon: ({ color, size }) => (
             <Feather name="user" size={24} color="#21212180" />
           ),
         }}
-        name="Profile"
+        name="Профіль"
         component={ProfileScreen}
       />
     </HomeTab.Navigator>

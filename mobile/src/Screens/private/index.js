@@ -13,9 +13,9 @@ const PrivateRoutes = () => {
         component={HomeScreen}
       />
 
-      <MainStack.Screen name="MapScreen" component={MapScreen} />
+      <MainStack.Screen name="Мапа" component={MapScreen} />
       <MainStack.Screen name="PostsScreen" component={PostScreen} />
-      <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
+      <MainStack.Screen name="Коментарі" component={CommentsScreen} />
       <MainStack.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}

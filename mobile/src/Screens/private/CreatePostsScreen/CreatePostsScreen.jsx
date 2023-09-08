@@ -13,7 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import Geocode from "react-geocode";
 import * as Location from "expo-location";
-
+import Spinner from "react-native-loading-spinner-overlay";
 import { useState, useEffect } from "react";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -102,15 +102,15 @@ const CreatePostsScreen = ({ navigation }) => {
     });
   };
 
-  // if (loader) {
-  //   return (
-  //     <Spinner
-  //       visible={loader}
-  //       textContent={"Loading..."}
-  //       textStyle={{ color: "#FFF" }}
-  //     />
-  //   );
-  // }
+  if (loader) {
+    return (
+      <Spinner
+        visible={loader}
+        textContent={"Loading..."}
+        textStyle={{ color: "#FFF" }}
+      />
+    );
+  }
 
   return (
     <>

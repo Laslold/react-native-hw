@@ -40,7 +40,6 @@ export const loginAuthThunk = createAsyncThunk(
       );
       return result;
     } catch (error) {
-      //   console.log("error login", error);
       return rejectWithValue(error);
     }
   }

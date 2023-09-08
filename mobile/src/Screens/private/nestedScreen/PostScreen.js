@@ -20,7 +20,8 @@ const PostScreen = ({ route, navigation }) => {
     const post = ref(db, "posts/");
     onValue(post, (snapshot) => {
       const data = snapshot.val();
-      setPost(Object.values(data));
+      const reverced = Object.values(data).reverse();
+      setPost(reverced);
     });
   };
   useEffect(() => {
@@ -28,14 +29,14 @@ const PostScreen = ({ route, navigation }) => {
   }, []);
 
   const onPressComents = (postId) => {
-    navigation.navigate("CommentsScreen", {
+    navigation.navigate("Коментарі", {
       postId,
       userId: userInfo.uid,
       name: userInfo.nickname,
     });
   };
   const onPressLocation = (location, name) => {
-    navigation.navigate("MapScreen", { location, name });
+    navigation.navigate("Мапа", { location, name });
   };
 
   const shemaItem = ({ item }) => {
